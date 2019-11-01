@@ -1,10 +1,12 @@
 # PolyBoost
 
 ## Description
-**PolyBoost** is a post-analysis tool for the batch processing output of [PolyPhen-2](http://genetics.bwh.harvard.edu/pph2/) (I am not affiliated with the PolyPhen-2 group) that replaces the [naive Bayes classifier](https://en.wikipedia.org/wiki/Naive_Bayes_classifier) with an extreme gradient boosting [XGBoost]([https://github.com/dmlc/xgboost) classifier.
+**PolyBoost** is a post-analysis tool for the batch processing output of [PolyPhen-2](http://genetics.bwh.harvard.edu/pph2/) that replaces the [naive Bayes classifier](https://en.wikipedia.org/wiki/Naive_Bayes_classifier) with an extreme gradient boosting [XGBoost]([https://github.com/dmlc/xgboost) classifier.
+
+(Note: I am not affiliated with the PolyPhen-2 group).
 ## Citation
 
-**PolyBoost: An enhanced genomic variant classifier** is currently under peer review. If, for some reason, you need to cite this in the meantime, please contact me.
+**PolyBoost: An enhanced genomic variant classifier using extreme gradient boosting** is currently under peer review. If, for some reason, you need to cite this in the meantime, please contact me.
 
 ## QuickStart
 
@@ -93,7 +95,20 @@ Example redirecting to output.txt
 
     python -m polyboost.polyboost polyphen2-example.txt humvar --out output.txt
 
-### 
+## Output Example
+    o_acc   o_pos   o_aa1   o_aa2   polyboost_probability   polyboost_prediction
+    P26439  186     P       L       0.35185128              benign
+    P26439  205     L       P       0.09412336              benign
+    P26439  213     S       G       0.37042004              benign
+    P26439  216     K       E       0.60328233              damaging
+    P26439  222     P       H       0.06907171              benign
+    P26439  222     P       Q       0.39627028              benign
+    P26439  222     P       T       0.20633507              benign
+    P26439  236     L       S       0.7706197               damaging
+    P26439  245     A       P       0.17939752              benign
+    P26439  253     Y       N       0.044733346             benign
+    P26439  254     Y       D       0.2756629               benign
+    P26439  259     T       M       0.027224064             benign
 
 ## Questions?
 
