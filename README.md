@@ -10,13 +10,21 @@
 
 You will need to install PolyBoost (see below) and obtain the **batch mode output** from PolyPhen2 predictions (http://genetics.bwh.harvard.edu/pph2/bgi.shtml). An example of the batch mode output is found in polyphen2-example.txt in this repository.
 
-Run PolyBoost as follows:
+After installation, run PolyBoost as follows:
 
     python3 -m polyboost [PolyPhen2 Output File] [Classifier]
 
 Where [PolyPhen2 Output File] is the path to the **batch mode** output from PolyPhen-2 and Classifier is either **humdiv** or **humvar**. If you don't know which one to use, use **humvar**.   
 
-## Set-up
+## Installation
+
+### QuickStart
+
+Install PolyBoost with into Python 3.7 using:
+
+    pip install polyboost
+    
+ If you are using Windows, XGBoost probably cannot be installed from PyPI. If you get an error message, follow the instructions for installation of XGBoost below and try this command again. 
 
 ### Requirements
 PolyBoost requires Python 3.7, xgboost, numpy and scipy. Numpy and SciPy should be installed automatically as dependencies of PolyBoost and XGBoost. ***XGBoost will **not** be automatically installed because installation from PyPi does not work reliably on Windows at time of release. Install XGBoost before installing PolyBoost.***
