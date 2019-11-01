@@ -111,11 +111,11 @@ def main():
     # Load the appropriate model and threshold
     threshold = None
     if args.classifier == "humvar":
-        modelpath = pkg_resources.resource_filename("models", "humvar-final.model")
+        modelpath = pkg_resources.resource_filename("polyboost.models", "humvar-final.model")
         bst.load_model(modelpath)
         threshold = 0.504057
     elif args.classifier == "humdiv":
-        modelpath = pkg_resources.resource_filename("models", "humdiv-final.model")
+        modelpath = pkg_resources.resource_filename("polyboost.models", "humdiv-final.model")
         bst.load_model(modelpath)
         threshold = 0.4250919
     else:

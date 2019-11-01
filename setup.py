@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="polyboost", # Replace with your own username
-    version="0.0.1",
+    version="1.0.0",
     author="Daniel J. Parente",
     author_email="dparente@kumc.edu",
     description="An enhanced genomic classifier",
@@ -23,4 +23,5 @@ setuptools.setup(
         "Operating System :: OS Independent",
     ],
     python_requires='>=3.7',
+    include_package_data=True
 )

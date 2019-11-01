@@ -6,35 +6,40 @@
 
 **PolyBoost: An enhanced genomic variant classifier** is currently under peer review. If, for some reason, you need to cite this in the meantime, please contact me.
 
-## Usage
+## QuickStart
 
-You will need to install PolyBoost (see below) and obtain the **batch mode output** from PolyPhen2 predictions (http://genetics.bwh.harvard.edu/pph2/bgi.shtml). An example of the batch mode output is found in polyphen2-example.txt in this repository.
-
-After installation, run PolyBoost as follows:
-
-    python3 -m polyboost [PolyPhen2 Output File] [Classifier]
-
-Where [PolyPhen2 Output File] is the path to the **batch mode** output from PolyPhen-2 and Classifier is either **humdiv** or **humvar**. If you don't know which one to use, use **humvar**.   
-
-## Installation
-
-### QuickStart
+You will need to install PolyBoost and obtain the **batch mode output** from PolyPhen2 predictions (http://genetics.bwh.harvard.edu/pph2/bgi.shtml). An example of the batch mode output is found in polyphen2-example.txt in this repository.
 
 Install PolyBoost with into Python 3.7 using:
 
-    pip install polyboost
+    pip3 install polyboost
     
- If you are using Windows, XGBoost probably cannot be installed from PyPI. If you get an error message, follow the instructions for installation of XGBoost below and try this command again. 
+If you are using Windows, xgboost (a dependency) probably cannot be installed from PyPI. If you get an error message, follow the instructions for installation of XGBoost below and try this command again.
+
+After installation, run PolyBoost as follows:
+
+    python -m polyboost.polyboost [PolyPhen2 Output File] [Classifier]
+
+Where [PolyPhen2 Output File] is the path to the **batch mode** output from PolyPhen-2 and Classifier is either **humdiv** or **humvar**. If you don't know which one to use, use **humvar**. Make sure the PolyPhen2 input file is in your working directory (i.e. the directory you are running that command from).
+
+Example:
+
+    python -m polyboost.polyboost polyphen2-example.txt humvar
+
+
+On some systems with multiple python distributions, you may need to use python3 (or python3.7) instead of "python" to use the correct version of python.
+
+## Installation
 
 ### Requirements
-PolyBoost requires Python 3.7, xgboost, numpy and scipy. Numpy and SciPy should be installed automatically as dependencies of PolyBoost and XGBoost. ***XGBoost will **not** be automatically installed because installation from PyPi does not work reliably on Windows at time of release. Install XGBoost before installing PolyBoost.***
+PolyBoost requires Python 3.7, xgboost, numpy and scipy. PolyBoost will attempt to install all of these dependencies automatically. ***However, XGBoost may **not** be automatically installed because installation from PyPi does not work reliably on Windows at time of release. If an error occurs, install XGBoost (see below) before installing PolyBoost.***
 
 Use of a Python [virtualenv](https://docs.python.org/3/library/venv.html) is recommended, but not required.
-
 
 #### Python 3.7
 
 You will need to install Python 3.7 through standard methods. 
+
 #### XGBoost
 
 Installation of XGBoost is ostensibly as easy as:
@@ -57,13 +62,13 @@ If you have difficulty, detailed instructions for installing XGBoost for your pl
 
 Install PolyBoost with:
 
-    pip install polyboost
+    pip3 install polyboost
     
 #### Numpy and Scipy
 
 You should **not** need to install numpy and scipy manually, but you can do so with:
 
-    pip install numpy scipy
+    pip3 install numpy scipy
 
 ## Options
 
@@ -72,21 +77,21 @@ You can specify the number of threads to run predictions. You must choose betwee
 
 Example using 8 threads:
 
-    python3 -m polyboost polyphen2output.txt humvar --threads 8
+    python -m polyboost.polyboost polyphen2-example.txt humvar --threads 8
 
 ### Threshold (--threshold)
 You can manually choose a threshold between binary classification of "benign" and "damaging". The default choices are 0.504057 for HumVar and 0.4250919 for HumDiv. These defaults were determined during classifier development by maximizing the Youden index (sensitivity + specificity - 1) of the receiver operating characteristic (ROC) curve.
 
 Example using a threshold value of 0.25:
 
-    python3 -m polyboost polyphen2output.txt humvar --threshold 0.25 
+    python3 -m polyboost.polyboost polyphen2-example.txt humvar --threshold 0.25 
 
 ### Output (--out)
 By default, PolyBoost outputs to the console (standard output). You can optionally output to a file using --out.
 
 Example redirecting to output.txt
 
-    python3 -m polyboost polyphen2output.txt humvar --out output.txt
+    python -m polyboost.polyboost polyphen2-example.txt humvar --out output.txt
 
 ### 
 
