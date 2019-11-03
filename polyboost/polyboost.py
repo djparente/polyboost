@@ -113,11 +113,11 @@ def main():
     if args.classifier == "humvar":
         modelpath = pkg_resources.resource_filename("polyboost.models", "humvar-final.model")
         bst.load_model(modelpath)
-        threshold = 0.504057
+        threshold = 0.5085766
     elif args.classifier == "humdiv":
         modelpath = pkg_resources.resource_filename("polyboost.models", "humdiv-final.model")
         bst.load_model(modelpath)
-        threshold = 0.4250919
+        threshold = 0.4356405
     else:
         raise("Invalid classifier")
 

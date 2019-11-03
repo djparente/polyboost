@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="polyboost", # Replace with your own username
-    version="1.0.1",
+    version="1.0.2",
     author="Daniel J. Parente",
     author_email="dparente@kumc.edu",
     description="An enhanced genomic variant classifier",
