@@ -82,7 +82,7 @@ Example using 8 threads:
     python -m polyboost.polyboost polyphen2-example.txt humvar --threads 8
 
 ### Threshold (--threshold)
-You can manually choose a threshold between binary classification of "benign" and "damaging". The default choices are 0.504057 for HumVar and 0.4250919 for HumDiv. These defaults were determined during classifier development by maximizing the Youden index (sensitivity + specificity - 1) of the receiver operating characteristic (ROC) curve.
+You can manually choose a threshold between binary classification of "benign" and "damaging". The default choices are 0.5085766 for HumVar and 0.4356405 for HumDiv. These defaults were determined during classifier development by maximizing the Youden index (sensitivity + specificity - 1) of the receiver operating characteristic (ROC) curve.
 
 Example using a threshold value of 0.25:
 
