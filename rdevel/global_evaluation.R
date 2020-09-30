@@ -46,7 +46,7 @@ deriveParameters <- function(sen, spec, prev) {
 	lrp = sen / (1-spec) # Positive likelihood ratio
 	lrn = (1-sen)/spec # Negative likelihood ratio
 	dor = lrp/lrn # Diagnostic odds ratio
-	f1 = harmonic.mean(ppv, sen) # F1 score
+	f1 = harmonic.mean(c(ppv, sen)) # F1 score
 	
 	# Return the parameters in a list
 	return(list(youden=youden, ppv=ppv, npv=npv, lrp=lrp, lrn=lrn, dor=dor, f1=f1))
