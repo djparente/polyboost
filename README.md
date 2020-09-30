@@ -20,14 +20,13 @@ If you are using Windows, xgboost (a dependency) probably cannot be installed fr
 
 After installation, run PolyBoost as follows:
 
-    python -m polyboost.polyboost [PolyPhen2 Output File] [Classifier]
+    python -m polyboost.polyboost [PolyPhen2 Output File]
 
-Where [PolyPhen2 Output File] is the path to the **batch mode** output from PolyPhen-2 and Classifier is either **humdiv** or **humvar**. If you don't know which one to use, use **humvar**. Make sure the PolyPhen2 input file is in your working directory (i.e. the directory you are running that command from).
+Where [PolyPhen2 Output File] is the path to the **batch mode** output from PolyPhen-2. Make sure the PolyPhen2 input file is in your working directory (i.e. the directory you are running that command from).
 
 Example:
 
-    python -m polyboost.polyboost polyphen2-example.txt humvar
-
+    python -m polyboost.polyboost polyphen2-example.txt
 
 On some systems with multiple python distributions, you may need to use python3 (or python3.7) instead of "python" to use the correct version of python.
 
@@ -79,36 +78,36 @@ You can specify the number of threads to run predictions. You must choose betwee
 
 Example using 8 threads:
 
-    python -m polyboost.polyboost polyphen2-example.txt humvar --threads 8
+    python -m polyboost.polyboost polyphen2-example.txt --threads 8
 
 ### Threshold (--threshold)
-You can manually choose a threshold between binary classification of "benign" and "damaging". The default choices are 0.5085766 for HumVar and 0.4356405 for HumDiv. These defaults were determined during classifier development by maximizing the Youden index (sensitivity + specificity - 1) of the receiver operating characteristic (ROC) curve.
+You can manually choose a threshold between binary classification of "benign" and "damaging". The default choice is 0.5660484. This default was determined during classifier development by maximizing the Youden index (sensitivity + specificity - 1) of the receiver operating characteristic (ROC) curve on an external validation dataset.
 
 Example using a threshold value of 0.25:
 
-    python3 -m polyboost.polyboost polyphen2-example.txt humvar --threshold 0.25 
+    python3 -m polyboost.polyboost polyphen2-example.txt --threshold 0.25 
 
 ### Output (--out)
 By default, PolyBoost outputs to the console (standard output). You can optionally output to a file using --out.
 
 Example redirecting to output.txt
 
-    python -m polyboost.polyboost polyphen2-example.txt humvar --out output.txt
+    python -m polyboost.polyboost polyphen2-example.txt --out output.txt
 
 ## Output Example
-    o_acc   o_pos   o_aa1   o_aa2   polyboost_probability   polyboost_prediction
-    P26439  186     P       L       0.35185128              benign
-    P26439  205     L       P       0.09412336              benign
-    P26439  213     S       G       0.37042004              benign
-    P26439  216     K       E       0.60328233              damaging
-    P26439  222     P       H       0.06907171              benign
-    P26439  222     P       Q       0.39627028              benign
-    P26439  222     P       T       0.20633507              benign
-    P26439  236     L       S       0.7706197               damaging
-    P26439  245     A       P       0.17939752              benign
-    P26439  253     Y       N       0.044733346             benign
-    P26439  254     Y       D       0.2756629               benign
-    P26439  259     T       M       0.027224064             benign
+    o_acc   o_pos   o_aa1   o_aa2   polyboost_score     polyboost_prediction
+    P26439  186     P       L       0.35185128          benign
+    P26439  205     L       P       0.09412336          benign
+    P26439  213     S       G       0.37042004          benign
+    P26439  216     K       E       0.60328233          damaging
+    P26439  222     P       H       0.06907171          benign
+    P26439  222     P       Q       0.39627028          benign
+    P26439  222     P       T       0.20633507          benign
+    P26439  236     L       S       0.7706197           damaging
+    P26439  245     A       P       0.17939752          benign
+    P26439  253     Y       N       0.044733346         benign
+    P26439  254     Y       D       0.2756629           benign
+    P26439  259     T       M       0.027224064         benign
 
 ## Questions?
 

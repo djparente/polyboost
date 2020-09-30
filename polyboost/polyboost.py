@@ -1,6 +1,7 @@
 # Daniel J. Parente, MD PhD
 # University of Kansas Medical Center
-# 2019-10-17
+# Initial version 2019-10-17
+# Major revision 2020-09-28
 
 import xgboost, argparse, sys, io
 import numpy as np
@@ -17,7 +18,7 @@ def parsePolyPhen(inputfile):
 
     # Header line
     headerFields = getFields(data[0][1:]) #Parse the header, ignoring the initial #
-    headers = headerFields[0:4] + ['polyboost_probability','polyboost_prediction']
+    headers = headerFields[0:4] + ['polyboost_score','polyboost_prediction']
 
     headerToIndex = { x : i for i, x in enumerate(headerFields) }
     vectors = []
@@ -69,7 +70,7 @@ def parsePolyPhen(inputfile):
         # will interpret as 0 (False). Any other string except ? we will interpret as 1 (True). I am not sure
         # if it will ever output "?", but we will treat this as missing data.
         # Convert the ints
-        for i in [4]: # Yes, I know the loop over 1 element is inefficient coding, but it matches the formatting above; readability!
+        for i in [4]: # Yes, I know the loop over 1 element is (slightly) inefficient coding, but it matches the formatting above; readability!
             if v[i] == '?' or v[i] == "":
                 v[i] = None
             else:
@@ -86,12 +87,11 @@ def parsePolyPhen(inputfile):
 def main():
     # Initialize an argument parsers
     parser = argparse.ArgumentParser(description="PolyBoost applies an extreme gradient boosted classifier to the PolyPhen-2 feaature set using a classifier based on either the HumVar or HumDiv training datasets.")
-
+    # Required argument
+    parser.add_argument('inputfile', type=argparse.FileType('r'), help="PolyPhen-2 Batch Processing Output File")
+    # Optional arguments
     parser.add_argument('--threads', help="Number of threads for the classifier", type=int, choices=range(1,17))
     parser.add_argument('--threshold', help="Custom threshold value for binary prediction", type=float)
-    parser.add_argument('inputfile', type=argparse.FileType('r'), help="PolyPhen-2 Batch Processing Output File")
-    parser.add_argument('classifier', metavar="classifier", choices=["humvar", "humdiv"],
-                        help="Select the classifier to use; either humvar or humdiv")
     parser.add_argument('--out', help="Output file", type=argparse.FileType('w'), default=sys.stdout)
 
     # Read the arguments
@@ -108,25 +108,17 @@ def main():
     # Initialize a classifier
     bst = xgboost.Booster({'nthread': threads})
 
-    # Load the appropriate model and threshold
-    threshold = None
-    if args.classifier == "humvar":
-        modelpath = pkg_resources.resource_filename("polyboost.models", "humvar-final.model")
-        bst.load_model(modelpath)
-        threshold = 0.5085766
-    elif args.classifier == "humdiv":
-        modelpath = pkg_resources.resource_filename("polyboost.models", "humdiv-final.model")
-        bst.load_model(modelpath)
-        threshold = 0.4356405
-    else:
-        raise("Invalid classifier")
+    # Load the model and set the threshold
+    modelpath = pkg_resources.resource_filename("polyboost.models", "polyboost.hv.new.model")
+    bst.load_model(modelpath)
 
-    # Set a custom threshold if any
+    # Set a custom threshold if any, otherwise use default
+    threshold = 0.5660484
     if args.threshold is not None:
         threshold = args.threshold
 
     # Perform predictions to obtain probabilities of damaging
-    pred = 1-bst.predict(matrix)    # The probability of damaging is actually actually 1- the model's probability due to the way it was trained
+    pred = bst.predict(matrix)
 
     # Apply a threshold to produce a binary prediction
     binary_predictions = [ "damaging" if x > threshold else "benign" for x in pred ]
