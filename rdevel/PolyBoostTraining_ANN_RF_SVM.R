@@ -107,20 +107,20 @@ trainSVM <- function(dataset) {
 }
 
 # Train ANN on HumVar and HumDiv
-#tunes.ann.hv <- trainANN(humvar.train)
-#tunes.ann.hd <- trainANN(humdiv.train)
+tunes.ann.hv <- trainANN(humvar.train)
+tunes.ann.hd <- trainANN(humdiv.train)
 
 # Train RF on HumVar and HumDiv
-#tunes.rf.hv <- trainRF(humvar.train)
-#tunes.rf.hd <- trainRF(humdiv.train)
+tunes.rf.hv <- trainRF(humvar.train)
+tunes.rf.hd <- trainRF(humdiv.train)
 
 # Train SVM on HumVar and HumDiv
-#tunes.svm.hv <- trainSVM(humvar.train)
-#tunes.svm.hd <- trainSVM(humdiv.train)
+tunes.svm.hv <- trainSVM(humvar.train)
+tunes.svm.hd <- trainSVM(humdiv.train)
 
 # Cleanup the workspace
-#rm(humvar.full)
-#rm(humvar.train)
-#rm(humdiv.full)
-#rm(humdiv.train)
-#rm(fx)
+rm(humvar.full)
+rm(humvar.train)
+rm(humdiv.full)
+rm(humdiv.train)
+rm(fx)
