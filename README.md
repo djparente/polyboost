@@ -4,9 +4,14 @@
 **PolyBoost** is a post-analysis tool for the batch processing output of [PolyPhen-2](http://genetics.bwh.harvard.edu/pph2/) that replaces the [naive Bayes classifier](https://en.wikipedia.org/wiki/Naive_Bayes_classifier) with an extreme gradient boosting [XGBoost]([https://github.com/dmlc/xgboost) classifier.
 
 (Note: I am not affiliated with the PolyPhen-2 group).
+
 ## Citation
 
-**PolyBoost: An enhanced genomic variant classifier using extreme gradient boosting** is currently under peer review. If, for some reason, you need to cite this in the meantime, please contact me.
+**PolyBoost: An enhanced genomic variant classifier using extreme gradient boosting** is published as technical brief in Proteomics: Clinical Applications here https://onlinelibrary.wiley.com/doi/10.1002/prca.201900124.
+
+## Research Use ##
+
+PolyBoost is a research tool for the analysis of protein variants. It should not be used in clinical settings as a diagnostic test without further regulatory approval.
 
 ## QuickStart
 
